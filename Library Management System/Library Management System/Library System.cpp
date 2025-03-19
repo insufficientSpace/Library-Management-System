@@ -1,22 +1,15 @@
 #include "library.h"
 
-void Library::showBooks() const
-{
-	cout << Library::Books << endl;
-}
-
-void Library::bookInfo(Library& obj) const
+void Library::showBooks(Book Obj[]) const
 {
 	for (int i = 0; i < SIZE; i++)
 	{
-		cout << "Book ID: " << obj.Books[i].id << endl;
-		cout << "The name of the book: " << obj.Books[i].name << endl;
-		cout << "The author of the book: " << obj.Books[i].author << endl;
-		cout << "The book's availability status: " << obj.Books[i].availabilityStatus << endl;
+		cout << "------------------------------------------------------------\n";
+		cout << "Book ID: " << Obj[i].id << endl;
+		cout << "The name of the book: " << Obj[i].name << endl;
+		cout << "The author of the book: " << Obj[i].author << endl;
+		cout << "The book's availability status: " << Obj[i].availabilityStatus << endl;
+		cout << "-------------------------------------------------------------\n";
+		cout << endl;
 	}
-}
-
-void Library::updateAvailabilityStatus()
-{
-
 }

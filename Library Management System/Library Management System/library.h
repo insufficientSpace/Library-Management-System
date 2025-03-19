@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+
 using namespace std;
 const int SIZE = 10;
 
@@ -16,11 +17,7 @@ public:
 		string author;
 		string availabilityStatus = "Available";
 	};
-	Book Books[SIZE];
-	void showBooks() const;//список книг
-	void addBook();//добавление книги
-	void bookInfo(Library&) const;//информация о книге
-	void updateAvailabilityStatus();//обновление статуса доступности книги
+	void showBooks(Book[]) const;//список книг
 };
 
 class LibraryUser
