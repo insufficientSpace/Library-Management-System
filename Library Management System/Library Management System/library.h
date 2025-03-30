@@ -27,11 +27,9 @@ public:
 	{
 		int id;
 		string name;
+		Library::Book books[SIZE];
 	};
-	void listOfBooksTaken(Library&) const;//список вз€тых книг
-	void userInfo(User&) const;//информаци€ о пользователе
-	void managingBorrowedBooks(User&);//”правление заемными книгами
-	void returnPeriod(Library&);//срок возврата
-	void addUser();//добавление пользовател€
+	void userInfo(LibraryUser::User&) const;//информаци€ о пользователе
+	void managingBorrowedBooks(LibraryUser::User[], int);//”правление заемными книгами
 };
 #endif // !LIBRARY_H

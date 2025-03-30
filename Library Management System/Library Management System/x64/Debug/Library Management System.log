@@ -1,4 +1,3 @@
 ﻿  Library Management System.cpp
-  Library System.cpp
-  Создание кода...
+C:\Users\ilnku\source\repos\Library Management System\Library Management System\Library Management System.cpp(11,9): warning C4101: secondChoice: неиспользованная локальная переменная
   Library Management System.vcxproj -> C:\Users\ilnku\source\repos\Library Management System\x64\Debug\Library Management System.exe

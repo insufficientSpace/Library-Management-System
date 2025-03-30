@@ -1,16 +1,19 @@
 ﻿#include "library.h"
-
+const int sizeOfUser = 3;
 
 int main()
 {
     Library obj;
     Library::Book Books[SIZE];
+    LibraryUser::User Users[sizeOfUser];
+    LibraryUser callMethod;
     int choice;
     int secondChoice;
-    int occupiedBookID;
-    string nameOfNewBook;
-    string nameAuthorOfNewBook;
+    int thirdChoice;
+    int choiceUser;
     char switchSymbol{ 0 };
+    cout << "==================================================LIBRARY==================================================\n";
+    cout << endl;
     for (int i = 0; i < SIZE; i++)
     {
         Books[i].name = "Book";
@@ -19,35 +22,42 @@ int main()
     }
 
     obj.showBooks(Books);
-
+    cout << "===========================================================================================================\n";
+    for (int i = 0; i < sizeOfUser; i++)
+    {
+        cout << "Enter the username for registration: ";
+        cin >> Users[i].name;
+        Users[i].id = rand() % 1000;
+    }
     while (true)
     {
-        cout << "Select a book by its ID: ";
+        cout << "Select a user: \n";
+        for (int i = 0; i < 3; i++)
+            cout << i << ") " << Users[i].name << endl;
+        
+        cin >> choiceUser;
+
+        cout << "Hi, " << Users[choiceUser].name << "! " << "select a book by its ID: ";
         cin >> choice;
+
         for (int i = 0; i < SIZE; i++)
+        {
             if (Books[i].id == choice)
             {
                 Books[i].availabilityStatus = "Unavailable";
-                cout << "Do you want to add a book?\n" <<
-                    "1)Yes\n" <<
-                    "2)No\n";
-                cin >> secondChoice;
-                if (secondChoice == 1)
-                {
-                    cout << "Select the id of the book that is occupied and place a new one by filling in the following parameters:\n";
-                    cout << "ID of the occupied book: ";
-                    cin >> occupiedBookID;
-                    cout << "The name of the book: ";
-                    cin >> nameOfNewBook;
-                    cout << "The author of the book: ";
-                    cin >> nameAuthorOfNewBook;
-                    Books[occupiedBookID].name = nameOfNewBook;
-                    Books[occupiedBookID].author = nameAuthorOfNewBook;
-                }
-                else if (secondChoice == 2)
+                callMethod.managingBorrowedBooks(Users, choiceUser);
+                *Users[choiceUser].books = Books[i];
+            }
+                else
                     continue;
             }
+        cout << "Find out user information?\n"
+            << "1)Yes\n"
+            << "2)No\n";
 
+        cin >> thirdChoice;
+        if (thirdChoice == 1)
+            callMethod.userInfo(Users[choiceUser]);
         cout << endl;
 
         cout << "========================================UPDATED LIST OF BOOKS========================================\n";
