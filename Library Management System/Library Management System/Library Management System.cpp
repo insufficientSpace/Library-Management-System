@@ -1,71 +1,56 @@
 ﻿#include "library.h"
 const int sizeOfUser = 3;
 
-int main()
-{
+int main() {
     Library obj;
     Library::Book Books[SIZE];
     LibraryUser::User Users[sizeOfUser];
     LibraryUser callMethod;
-    int choice;
-    int secondChoice;
-    int thirdChoice;
-    int choiceUser;
-    char switchSymbol{ 0 };
+
     cout << "==================================================LIBRARY==================================================\n";
-    cout << endl;
-    for (int i = 0; i < SIZE; i++)
-    {
-        Books[i].name = "Book";
-        Books[i].author = "Author";
+    for (int i = 0; i < SIZE; i++) {
+        Books[i].name = "Book" + to_string(i + 1);
+        Books[i].author = "Author" + to_string(i + 1);
         Books[i].id = i;
     }
 
     obj.showBooks(Books);
     cout << "===========================================================================================================\n";
-    for (int i = 0; i < sizeOfUser; i++)
-    {
+
+    // Регистрация пользователей
+    for (int i = 0; i < sizeOfUser; i++) {
         cout << "Enter the username for registration: ";
         cin >> Users[i].name;
-        Users[i].id = rand() % 1000;
+        Users[i].id = rand() % 1000; // Генерация случайного ID
+        Users[i].borrowedCount = 0; // Инициализация количества взятых книг
     }
-    while (true)
-    {
+
+    while (true) {
         cout << "Select a user: \n";
-        for (int i = 0; i < 3; i++)
-            cout << i << ") " << Users[i].name << endl;
-        
+        for (int i = 0; i < sizeOfUser; i++)
+            cout << i + 1 << ") " << Users[i].name << endl;
+
+        int choiceUser;
         cin >> choiceUser;
 
-        cout << "Hi, " << Users[choiceUser].name << "! " << "select a book by its ID: ";
-        cin >> choice;
+        if (choiceUser < 1 || choiceUser > sizeOfUser) {
+            cout << "Invalid choice. Try again.\n";
+            continue;
+        }
 
-        for (int i = 0; i < SIZE; i++)
-        {
-            if (Books[i].id == choice)
-            {
-                Books[i].availabilityStatus = "Unavailable";
-                callMethod.managingBorrowedBooks(Users, choiceUser);
-                *Users[choiceUser].books = Books[i];
-            }
-                else
-                    continue;
-            }
-        cout << "Find out user information?\n"
-            << "1)Yes\n"
-            << "2)No\n";
+        // Вызов метода управления взятыми книгами
+        callMethod.managingBorrowedBooks(Books, SIZE, Users[choiceUser - 1]);
 
-        cin >> thirdChoice;
-        if (thirdChoice == 1)
-            callMethod.userInfo(Users[choiceUser]);
-        cout << endl;
-
-        cout << "========================================UPDATED LIST OF BOOKS========================================\n";
+        cout << "=============================================Updated list of books:=============================================\n";
         obj.showBooks(Books);
-        cout << "To finish, enter q/Q or another one to continue\n";
-        cin >> switchSymbol;
-        if (switchSymbol == 'q' || switchSymbol == 'Q')
-            break;
+        cout << "================================================================================================================\n";
+        // Вызов метода для отображения информации о пользователе
+        callMethod.userInfo(Users[choiceUser - 1]);
+
+        char continueChoice;
+        cout << "Do you want to continue? (y/n): ";
+        cin >> continueChoice;
+        if (continueChoice != 'y') break;
     }
 
     return 0;
